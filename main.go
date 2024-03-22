@@ -4,13 +4,14 @@ import (
 	"fmt"
 	"go-gorm/database"
 	"go-gorm/router"
+	"os"
 )
 
 func main() {
 	database.StartDB()
-	const PORT = ":8080"
+	PORT := os.Getenv("PORT")
 
-	fmt.Sprintln("server start at", PORT)
+	fmt.Sprintln("server start at :", PORT)
 	router.StartApp().Run(PORT)
 
 	// r := router.StartApp()
