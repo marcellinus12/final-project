@@ -16,11 +16,8 @@ var (
 	user     = os.Getenv("PGUSER")
 	password = os.Getenv("PGPASSWORD")
 	dbname   = os.Getenv("PGDATABASE")
-)
-
-var (
-	db  *gorm.DB
-	err error
+	db       *gorm.DB
+	err      error
 )
 
 func StartDB() {
