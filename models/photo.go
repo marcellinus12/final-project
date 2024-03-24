@@ -16,8 +16,8 @@ type Photo struct {
 	UserID    uint   `json:"user_id"`
 	User      *User
 	Comments  []Comment
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 func (p *Photo) BeforeCreate(tx *gorm.DB) error {
