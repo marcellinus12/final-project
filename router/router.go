@@ -27,7 +27,7 @@ func StartApp() *gin.Engine {
 	{
 		photoGroup.Use(middlewares.Authentication())
 		photoGroup.GET("/", controllers.GetAllPhotos)
-		photoGroup.POST("/create", controllers.CreatePhoto)
+		photoGroup.POST("/", controllers.CreatePhoto)
 		photoGroup.PUT("/:photoID", middlewares.PhotoAuthorization(), controllers.UpdatePhoto)
 		photoGroup.DELETE("/:photoID", middlewares.PhotoAuthorization(), controllers.DeletePhoto)
 	}
@@ -36,7 +36,7 @@ func StartApp() *gin.Engine {
 	{
 		commentGroup.Use(middlewares.Authentication())
 		commentGroup.GET("/", controllers.GetAllComments)
-		commentGroup.POST("/create", controllers.CreateComment)
+		commentGroup.POST("/", controllers.CreateComment)
 		commentGroup.PUT("/:commentID", middlewares.CommentAuthorization(), controllers.UpdateComment)
 		commentGroup.DELETE("/:commentID", middlewares.CommentAuthorization(), controllers.DeleteComment)
 	}
@@ -45,7 +45,7 @@ func StartApp() *gin.Engine {
 	{
 		socialMediaGroup.Use(middlewares.Authentication())
 		socialMediaGroup.GET("/", controllers.GetAllSocialMedia)
-		socialMediaGroup.POST("/create", controllers.CreateSocialMedia)
+		socialMediaGroup.POST("/", controllers.CreateSocialMedia)
 		socialMediaGroup.PUT("/:socialMediaID", middlewares.SocialMediaAuthorization(), controllers.UpdateSocialMedia)
 		socialMediaGroup.DELETE("/:socialMediaID", middlewares.SocialMediaAuthorization(), controllers.DeleteSocialMedia)
 	}
