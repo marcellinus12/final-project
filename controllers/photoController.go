@@ -17,8 +17,7 @@ func GetAllPhotos(c *gin.Context) {
 	var photos []models.Photo
 	query := `SELECT photos.*, users.*, comments.*
                FROM photos
-               LEFT JOIN users ON photos.user_id = users.id
-               LEFT JOIN comments ON photos.id = comments.photo_id`
+               JOIN users ON photos.user_id = users.id`
 
 	if err := db.Raw(query).Scan(&photos).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
