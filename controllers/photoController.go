@@ -9,13 +9,16 @@ import (
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 )
 
 func GetAllPhotos(c *gin.Context) {
 	db := database.GetDB()
 
 	var photos []models.Photo
-	err := db.Preload("User").Preload("Comments").Find(&photos).Error
+	err := db.Preload("User", func(db *gorm.DB) *gorm.DB {
+		return db.Select("email, username") // Specify columns you want to select
+	}).Preload("Comments").Find(&photos).Error
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error":   "Bad Request",
