@@ -15,12 +15,8 @@ func GetAllPhotos(c *gin.Context) {
 	db := database.GetDB()
 
 	var photos []models.Photo
-	query := `SELECT photos.*, users.*, comments.*
-               FROM photos
-               JOIN users ON users.id = photos.user_id
-               JOIN comments ON photos.id = comments.photo_id`
-
-	if err := db.Raw(query).Scan(&photos).Error; err != nil {
+	err := db.Preload("User").Preload("Comments").Find(&photos).Error
+	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error":   "Bad Request",
 			"message": err.Error(),
